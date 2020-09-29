@@ -8,5 +8,7 @@ const init = () => {
 
 }
 
+console.log("Estoy probando mi nueva rama")
+
 window.addEventListener('load', init)
-/* myFunction(); */
+    /* myFunction(); */
