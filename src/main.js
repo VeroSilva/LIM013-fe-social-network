@@ -7,5 +7,10 @@ const init = () => {
   window.addEventListener('hashchange', () => changeView(window.location.hash));
 };
 
-window.addEventListener('load', init);
-/* myFunction(); */
+
+
+console.log("Estoy probando mi nueva rama")
+
+window.addEventListener('load', init)
+    /* myFunction(); */
+
