@@ -10,6 +10,8 @@ const changeView = (route) => {
     { return container.appendChild(components.sesion()); }
     case '#/registro':
     { return container.appendChild(components.registro()); }
+    case '#/timeline':
+    { return container.appendChild(components.timeline()); }
     default:
       return container.appendChild(components.different());
   }
