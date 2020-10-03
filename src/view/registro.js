@@ -13,8 +13,20 @@ export default () => {
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewRegistro;
+  const buttonSignUp = divElem.querySelector('#buttonSignUp');
+  buttonSignUp.addEventListener('click', () => {
+    const usuarioSignUp = divElem.querySelector('#usuarioSignUp').value;
+    const passwordSignUp = divElem.querySelector('#contraseñaSignUp').value;
+    const auth = firebase.auth();
+    auth.createUserWithEmailAndPassword(usuarioSignUp, passwordSignUp)
+      .then((userCredential) => {
+        if (userCredential) {
+          console.log('Ha logrado registrarse');
+        } else {
+          console.log('Ha ingresado algún dato inválido');
+        }
+      });
+  });
+
   return divElem;
 };
-
-// const usuarioSignUp = document.querySelector('#usuarioSignUp');
-// console.log(usuarioSignUp)

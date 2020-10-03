@@ -19,5 +19,16 @@ export default () => {
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewSesion;
+  const buttonSignIn = divElem.querySelector('#buttonSignIn');
+  buttonSignIn.addEventListener('click', () => {
+    const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
+    const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
+    const auth = firebase.auth();
+    auth.signInWithEmailAndPassword(usuarioSignIn, passwordSignIn)
+      .then(userCredential => {
+        console.log('si se ingreso usuario');
+      });
+  });
+
   return divElem;
 };
