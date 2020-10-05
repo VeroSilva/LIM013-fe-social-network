@@ -1,108 +1,116 @@
 * {
-    margin: auto;
-    outline: none !important;
-    text-align: center;
+  margin: auto;
+  outline: none !important;
+  text-align: center;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    font-family: 'Alegreya Sans', sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
 }
 
 p,
 a,
 button {
-    font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .cabecera img {
-    width: 100%;
+  width: 100%;
 }
 
 .signInRS img {
-    width: 27px;
+  width: 27px;
 }
 
 .logotipo {
-    width: 60%;
-    margin: auto;
+  width: 60%;
+  margin: auto;
 }
 
 .logotipo img {
-    width: 100%;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .form input {
-    margin-bottom: 20px;
-    border: 2px solid;
-    border-radius: 10px;
-    padding: 5px;
-    -webkit-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+  -webkit-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .styleH2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #inicio-sesion p {
-    margin: 0px;
-    font-size: 13px;
-    font-family: 'Lato', sans-serif;
+  margin: 0px;
+  font-size: 13px;
+  font-family: "Lato", sans-serif;
 }
 
 #buttonSignIn,
 #buttonSignUp {
-    background: #B9E769;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 20px;
-    margin-bottom: 30px;
-    color: black;
-    -webkit-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
-    box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  background: #b9e769;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 20px;
+  margin-bottom: 30px;
+  color: black;
+  -webkit-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 footer {
-    background: #ceee96;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 5px;
-    font-size: 15px;
+  background: #ceee96;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px;
+  font-size: 15px;
 }
 
 a {
-    font-size: 13px;
-    text-decoration: none;
-    font-weight: 600;
-    color: unset;
-    margin: 0px;
-    margin: 0px 0px 0px 5px;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 600;
+  color: unset;
+  margin: 0px;
+  margin: 0px 0px 0px 5px;
 }
 
 .registrate {
-    display: flex;
-    margin: 0px auto !important;
-    width: 80%;
-    justify-content: center;
+  display: flex;
+  margin: 0px auto !important;
+  width: 80%;
+  justify-content: center;
 }
 
 .signInRS {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
 
 .signInRS img {
-    margin: 0px 5px;
+  margin: 0px 5px;
+}
+
+.modal-error p {
+  color: red;
+}
+
+.modal-error {
+  margin-bottom: 20px;
 }
