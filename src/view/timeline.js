@@ -11,6 +11,7 @@ export default () => {
     const auth = firebase.auth();
     auth.signOut()
       .then(() => {
+        window.location.assign('#/');
         console.log('¡Se cerró, lo logramos!');
       });
   });

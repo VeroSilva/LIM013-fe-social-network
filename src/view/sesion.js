@@ -6,8 +6,9 @@ export default () => {
         <h2 class="styleH2">¡Bienvenido mochilero!</h2>
         <div class="form">
         <input type="text" placeholder="Correo electrónico" id="usuarioSignIn">
-        <input type="text" placeholder="Contraseña" id="contraseñaSignIn">
+        <input type="password" placeholder="Contraseña" id="contraseñaSignIn">
         <button type="submit" id="buttonSignIn">Iniciar sesión</button>
+        <div id="errorMessage"></div>
         </div>
         <p class="textoSignIn">Iniciar sesión con Google o Facebook</p>
         <div class="signInRS">
@@ -25,8 +26,14 @@ export default () => {
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
     const auth = firebase.auth();
     auth.signInWithEmailAndPassword(usuarioSignIn, passwordSignIn)
-      .then(userCredential => {
-        console.log('si se ingreso usuario');
+      .then((userCredential) => {
+        console.log('Ha logrado iniciar sesión');
+        window.location.assign('#/timeline');
+      })
+      .catch((error) => {
+        const errorContainer = divElem.querySelector('#errorMessage');
+        const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
+        errorContainer.innerHTML = templateError;
       });
   });
 
