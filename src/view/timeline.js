@@ -1,3 +1,4 @@
+import {logOut} from'../firebase/auth.js'
 export default () => {
   const viewTimeline = `
     <div id="Pantalla">
@@ -8,8 +9,7 @@ export default () => {
   divElem.innerHTML = viewTimeline;
   const buttonLogout = divElem.querySelector('#buttonLogout');
   buttonLogout.addEventListener('click', () => {
-    const auth = firebase.auth();
-    auth.signOut()
+    logOut()
       .then(() => {
         window.location.assign('#/');
         console.log('¡Se cerró, lo logramos!');
