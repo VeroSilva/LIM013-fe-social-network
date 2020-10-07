@@ -1,4 +1,4 @@
-import {loginUser} from'../firebase/auth.js'
+import { loginUser } from '../firebase/auth.js';
 
 export default () => {
   const viewSesion = `
@@ -26,10 +26,9 @@ export default () => {
   buttonSignIn.addEventListener('click', () => {
     const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
-    
     loginUser(usuarioSignIn, passwordSignIn)
       .then((userCredential) => {
-        console.log('Ha logrado iniciar sesión');
+        console.log(userCredential);
         window.location.assign('#/timeline');
       })
       .catch((error) => {
