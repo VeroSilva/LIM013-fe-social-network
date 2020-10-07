@@ -16,7 +16,7 @@ export default () => {
         </div>
         <p class="textoSignIn">Iniciar sesión con Google o Facebook</p>
         <div class="signInRS">
-            <img src="images/googleRS.png">
+            <img src="images/googleRS.png" id="signGoogle">
         </div>
         <div class="registrate"><p>¿No tienes una cuenta?</p><a href="#/registro">Regístrate</a></div>
         </div>
