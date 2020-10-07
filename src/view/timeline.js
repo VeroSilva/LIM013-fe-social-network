@@ -1,4 +1,5 @@
-import {logOut} from'../firebase/auth.js'
+import { logOut } from '../firebase/auth.js';
+
 export default () => {
   const viewTimeline = `
     <div id="Pantalla">
