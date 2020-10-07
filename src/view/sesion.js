@@ -16,7 +16,7 @@ export default () => {
         </div>
         <p class="textoSignIn">Iniciar sesión con Google o Facebook</p>
         <div class="signInRS">
-            <img src="images/googleRS.png">
+            <img src="images/googleRS.png" id="signGoogle">
         </div>
         <div class="registrate"><p>¿No tienes una cuenta?</p><a href="#/registro">Regístrate</a></div>
         </div>
@@ -33,8 +33,8 @@ export default () => {
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
     loginUser(usuarioSignIn, passwordSignIn)
       .then((userCredential) => {
-        console.log("Ha logrado iniciar sesión");
-        window.location.assign("#/timeline");
+        console.log(userCredential);
+        window.location.assign('#/timeline');
       })
       .catch((error) => {
         const errorContainer = divElem.querySelector("#errorMessage");

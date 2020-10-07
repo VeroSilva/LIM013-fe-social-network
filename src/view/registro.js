@@ -1,4 +1,5 @@
-import {createUserAccount} from'../firebase/auth.js'
+import { createUserAccount } from '../firebase/auth.js';
+
 export default () => {
   const viewRegistro = `
     <div id="Registro">
@@ -19,10 +20,9 @@ export default () => {
   buttonSignUp.addEventListener('click', () => {
     const usuarioSignUp = divElem.querySelector('#usuarioSignUp').value;
     const passwordSignUp = divElem.querySelector('#contraseñaSignUp').value;
-    
-      createUserAccount(usuarioSignUp, passwordSignUp)
+    createUserAccount(usuarioSignUp, passwordSignUp)
       .then((userCredential) => {
-        console.log('Ha logrado registrarse');
+        console.log(userCredential);
         window.location.assign('#/timeline');
       })
       .catch((error) => {
