@@ -1,3 +1,5 @@
+import { loginUser, loginGoogle } from '../firebase/auth.js';
+
 export default () => {
   const viewSesion = `
     <div id="inicio-sesion">
@@ -22,13 +24,14 @@ export default () => {
 
   const divElem = document.createElement("div");
   divElem.innerHTML = viewSesion;
-  const buttonSignIn = divElem.querySelector("#buttonSignIn");
-  buttonSignIn.addEventListener("click", () => {
-    const usuarioSignIn = divElem.querySelector("#usuarioSignIn").value;
-    const passwordSignIn = divElem.querySelector("#contraseñaSignIn").value;
-    const auth = firebase.auth();
-    auth
-      .signInWithEmailAndPassword(usuarioSignIn, passwordSignIn)
+
+  const buttonSignIn = divElem.querySelector('#buttonSignIn');
+  const buttonGoogle = divElem.querySelector('#signGoogle');
+
+  buttonSignIn.addEventListener('click', () => {
+    const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
+    const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
+    loginUser(usuarioSignIn, passwordSignIn)
       .then((userCredential) => {
         console.log("Ha logrado iniciar sesión");
         window.location.assign("#/timeline");
@@ -38,6 +41,10 @@ export default () => {
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
         errorContainer.innerHTML = templateError;
       });
+  });
+
+  buttonGoogle.addEventListener('click', () => {
+    loginGoogle();
   });
 
   return divElem;
