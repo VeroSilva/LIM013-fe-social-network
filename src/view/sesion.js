@@ -1,4 +1,4 @@
-import { loginUser } from '../firebase/auth.js';
+import { loginUser, loginGoogle } from '../firebase/auth.js';
 
 export default () => {
   const viewSesion = `
@@ -14,8 +14,8 @@ export default () => {
         </div>
         <p class="textoSignIn">Iniciar sesión con Google o Facebook</p>
         <div class="signInRS">
-            <img src="images/faceb.png">
-            <img src="images/google.png">
+            <img src="images/faceb.png" id="signFacebook"> 
+            <img src="images/google.png" id="signGoogle">
         </div>
         <div class="registrate"><p>¿No tienes una cuenta?</p><a href="#/registro">Regístrate</a></div>
     </div>`;
@@ -23,6 +23,8 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewSesion;
   const buttonSignIn = divElem.querySelector('#buttonSignIn');
+  const buttonGoogle = divElem.querySelector('#signGoogle');
+
   buttonSignIn.addEventListener('click', () => {
     const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
@@ -36,6 +38,10 @@ export default () => {
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
         errorContainer.innerHTML = templateError;
       });
+  });
+
+  buttonGoogle.addEventListener('click', () => {
+    loginGoogle();
   });
 
   return divElem;
