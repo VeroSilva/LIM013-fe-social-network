@@ -46,6 +46,5 @@ export default () => {
   buttonGoogle.addEventListener('click', () => {
     loginGoogle();
   });
-
   return divElem;
 };
