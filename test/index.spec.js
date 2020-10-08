@@ -29,11 +29,11 @@ describe('createUserAccount', () => {
   it('deberia ser una función', () => expect(typeof loginUser).toBe('function'));
   it('Debería crear usuario', () => {
     createUserAccount('verosilva@gmail.com', 'hola123456')
-    .then((user) => {
-      expect(user.email).toBe('veronicasilva@gmail.com');
-      expect(user.password).toBe('hola123456');
-      expect(user.isAnonymous).toBe(false);
-    });
+      .then((user) => {
+        expect(user.email).toBe('veronicasilva@gmail.com');
+        expect(user.password).toBe('hola123456');
+        expect(user.isAnonymous).toBe(false);
+      });
   });
 });
 describe('login with gmail', () => {
@@ -46,4 +46,3 @@ describe('login with gmail', () => {
     });
   });
 });
-
