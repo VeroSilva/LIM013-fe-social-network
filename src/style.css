@@ -173,6 +173,10 @@ a {
     position: absolute;
     z-index: -1;
     bottom: 0;
+    width: 100%;
+  }
+  .cabeceraDesktop img {
+    width: 100%;
   }
   .galletita {
     box-shadow: 7px 0px 14px 0px rgba(0, 0, 0, 0.2);
@@ -183,8 +187,5 @@ a {
     border-radius: 10px;
     width: 60%;
     padding: 20px;
-  }
-  .cabeceraDesktop img {
-    width: 100%;
   }
 }
