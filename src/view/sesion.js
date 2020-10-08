@@ -22,7 +22,7 @@ export default () => {
         </div>
     </div>`;
 
-  const divElem = document.createElement("div");
+  const divElem = document.createElement('div');
   divElem.innerHTML = viewSesion;
 
   const buttonSignIn = divElem.querySelector('#buttonSignIn');
@@ -37,7 +37,7 @@ export default () => {
         window.location.assign('#/timeline');
       })
       .catch((error) => {
-        const errorContainer = divElem.querySelector("#errorMessage");
+        const errorContainer = divElem.querySelector('#errorMessage');
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
         errorContainer.innerHTML = templateError;
       });
