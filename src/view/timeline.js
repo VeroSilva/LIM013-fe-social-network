@@ -1,4 +1,4 @@
-import { logOut } from '../firebase/auth.js';
+import { logOutEvent } from '../firebase/firebasecontroller.js';
 
 export default () => {
   const viewTimeline = `
@@ -11,13 +11,7 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewTimeline;
   const buttonLogout = divElem.querySelector('#buttonLogout');
-  buttonLogout.addEventListener('click', () => {
-    logOut()
-      .then(() => {
-        window.location.assign('#/');
-        console.log('¡Se cerró, lo logramos!');
-      });
-  });
+  buttonLogout.addEventListener('click', logOutEvent);
   const firestoreDb = firebase.firestore();
   const sendPost = divElem.querySelector('#sendPost');
   sendPost.addEventListener('click', () => {
