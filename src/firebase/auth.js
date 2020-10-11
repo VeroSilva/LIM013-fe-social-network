@@ -6,7 +6,7 @@ export const loginUser = (usuarioSignIn, passwordSignIn) => firebase.auth()
 
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider)
+  return firebase.auth().signInWithPopup(provider);
   /* .then((result) => {
     console.log(result);
     window.location.assign('#/timeline');
