@@ -2,11 +2,19 @@ import { logOutEvent } from '../firebase/firebasecontroller.js';
 
 export default () => {
   const viewTimeline = `
-    <div id="Pantalla">
-        <button type="submit" id="buttonLogout">Cerrar sesión</button>
-        <input type="text" placeholder="¿Como te sientes hoy?" id="postUser">
-        <button type="submit" id="sendPost">Publicar</button>
-    </div>`;
+  <div id="Pantalla">
+  <div id="cabecera">
+    <img src="https://img.icons8.com/color/48/000000/user-female-circle.png"/>
+    <div class="logotipoTimeline"><img src="images/logo-RedSocial.png"></div>
+    <button type="submit" id="buttonLogout">Cerrar sesión</button>
+  </div>
+  <div class="prepost">
+    <input type="text" placeholder="¿Como te sientes hoy?" id="postUser">
+    <button type="submit" id="sendPost">Publicar</button>
+  </div>
+    <div id="posted">
+    </div>
+</div>`
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewTimeline;
