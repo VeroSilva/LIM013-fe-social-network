@@ -144,6 +144,42 @@ a {
   display: none;
 }
 
+#cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  border-bottom: 1px solid #bebebe;
+}
+#buttonLogout {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+}
+.logotipoTimeline img {
+  width: 100%;
+  align-self: center;
+}
+.logotipoTimeline {
+  width: 30%;
+  display: flex;
+}
+.prepost {
+  margin: 25px 0px;
+}
+#postUser {
+  border: none;
+  background: #f0f0f0;
+  padding: 6px;
+  border-radius: 10px;
+}
+#sendPost {
+  border: none;
+  background: #efea5a;
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+}
 @media only screen and (min-width: 500px) {
   main {
     min-height: 850px;
