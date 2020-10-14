@@ -12,4 +12,4 @@ const init = () => {
 
 console.log('Estoy probando mi nueva rama', init);
 
-window.addEventListener('load', init);
+window.addEventListener('load', init); // llama a init una vez que la pagina este cargada
