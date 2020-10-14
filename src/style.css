@@ -144,6 +144,43 @@ a {
   display: none;
 }
 
+#cabecera {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  border-bottom: 1px solid #BEBEBE;
+}
+#buttonLogout {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: black;
+}
+.logotipoTimeline img {
+  width: 100%;
+  align-self: center;
+}
+.logotipoTimeline {
+  width: 30%;
+  display: flex;
+}
+.prepost {
+  margin: 25px 0px;
+}
+#postUser {
+  border: none;
+  background: #F0F0F0;
+  padding: 6px;
+  border-radius: 10px;
+}
+#sendPost {
+  border: none;
+  background: #EFEA5A;
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 500px) {
   main {
     min-height: 850px;
@@ -177,6 +214,42 @@ a {
   }
   .cabeceraDesktop img {
     width: 100%;
+  }
+  #cabecera {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid #BEBEBE;
+  }
+  #buttonLogout {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: black;
+  }
+  .logotipoTimeline img {
+    width: 100%;
+    align-self: center;
+  }
+  .logotipoTimeline {
+    width: 30%;
+    display: flex;
+  }
+  .prepost {
+    margin: 25px 0px;
+  }
+  #postUser {
+    border: none;
+    background: #F0F0F0;
+    padding: 6px;
+    border-radius: 10px;
+  }
+  #sendPost {
+    border: none;
+    background: #EFEA5A;
+    border-radius: 10px;
+    padding: 6px;
+    cursor: pointer;
   }
   .galletita {
     box-shadow: 7px 0px 14px 0px rgba(0, 0, 0, 0.2);
