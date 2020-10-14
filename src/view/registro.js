@@ -1,4 +1,4 @@
-import { createUserAccount } from "../firebase/auth.js";
+import { createUserAccount, loginUser } from '../firebase/auth.js';
 
 export default () => {
   const viewRegistro = `
@@ -6,7 +6,7 @@ export default () => {
         <div class="logotipo"><img src="images/logo-RedSocial.png"></div>
         <h2 class="styleH2">¡Se parte de esta comunidad!</h2>
         <div class="form">
-        <input type="text" placeholder="name" id="displayName">
+        <input type="text" placeholder="Nombre" id="displayName">
         <input type="text" placeholder="Correo electrónico" id="usuarioSignUp">
         <input type="text" placeholder="Contraseña" id="contraseñaSignUp">
         <button type="submit" id="buttonSignUp">Registrate</button>
@@ -15,25 +15,24 @@ export default () => {
         <div class="iniciaSesion"><p>¿Ya tienes una cuenta?</p><a href="#/">Inicia Sesión</a></div>
     </div>`;
 
-  const divElem = document.createElement("div");
+  const divElem = document.createElement('div');
   divElem.innerHTML = viewRegistro;
-  const buttonSignUp = divElem.querySelector("#buttonSignUp");
-  buttonSignUp.addEventListener("click", () => {
-    //const userNameSignUp = divElem.querySelector("#displayName").value;
-    const usuarioSignUp = divElem.querySelector("#usuarioSignUp").value;
-    const passwordSignUp = divElem.querySelector("#contraseñaSignUp").value;
+  const buttonSignUp = divElem.querySelector('#buttonSignUp');
+  buttonSignUp.addEventListener('click', () => {
+    const userNameSignUp = divElem.querySelector('#displayName').value;
+    const usuarioSignUp = divElem.querySelector('#usuarioSignUp').value;
+    const passwordSignUp = divElem.querySelector('#contraseñaSignUp').value;
     createUserAccount(usuarioSignUp, passwordSignUp)
       .then((userCredential) => {
-        console.log(userCredential);
-        /* let data = {
+        userCredential.user.updateProfile({
           displayName: userNameSignUp,
-          email: usuarioSignUp,
-        };
-        console.log(data); */
-        window.location.assign("#/timeline");
+          // photo: el storage lo relaciono con el id;
+        }).then(() => {
+          loginUser(usuarioSignUp, passwordSignUp);
+        });
       })
       .catch((error) => {
-        const errorContainer = divElem.querySelector("#errorMessage");
+        const errorContainer = divElem.querySelector('#errorMessage');
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
         errorContainer.innerHTML = templateError;
       });

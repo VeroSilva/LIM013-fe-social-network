@@ -1,9 +1,10 @@
-import { loginUser, loginGoogle } from "../firebase/auth.js";
-import { user } from "../firebase/auth.js";
+import { loginUser, user } from '../firebase/auth.js';
+import { loginGoogleEvent } from '../firebase/firebasecontroller.js';
+
 // import { loginGoogleEvent } from "../firebase/firebasecontroller.js";
 
 export default () => {
-  const divElem = document.createElement("div");
+  const divElem = document.createElement('div');
   const viewSesion = `
     <div id="inicio-sesion">
         <div class="cabeceraMobile"><img src="images/mochilerosqueda.png"></div>
@@ -26,19 +27,19 @@ export default () => {
     </div>`;
   divElem.innerHTML = viewSesion;
 
-  const buttonSignIn = divElem.querySelector("#buttonSignIn");
-  const buttonGoogle = divElem.querySelector("#signGoogle");
-  const errorContainer = divElem.querySelector("#errorMessage");
+  const buttonSignIn = divElem.querySelector('#buttonSignIn');
+  const buttonGoogle = divElem.querySelector('#signGoogle');
+  const errorContainer = divElem.querySelector('#errorMessage');
 
-  buttonSignIn.addEventListener("click", () => {
-    const usuarioSignIn = divElem.querySelector("#usuarioSignIn").value;
-    const passwordSignIn = divElem.querySelector("#contraseñaSignIn").value;
+  buttonSignIn.addEventListener('click', () => {
+    const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
+    const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
     loginUser(usuarioSignIn, passwordSignIn)
       .then((userCredential) => {
         // console.log(userCredential);
         // user = userCredential.user;
         console.log(user);
-        window.location.assign("#/timeline");
+        window.location.assign('#/timeline');
       })
       .catch((error) => {
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
@@ -46,7 +47,7 @@ export default () => {
       });
   });
 
-  buttonGoogle.addEventListener("click", loginGoogle);
+  buttonGoogle.addEventListener('click', loginGoogleEvent);
 
   return divElem;
 };

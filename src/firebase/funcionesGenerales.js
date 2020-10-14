@@ -1,40 +1,40 @@
 const crud = {
-  eliminar: function (id, firestoreDb) {
+  eliminar(id, firestoreDb) {
     firestoreDb
-      .collection("posts")
+      .collection('posts')
       .doc(id)
       .delete()
-      .then(function () {
-        console.log("Document successfuly deleted!");
+      .then(() => {
+        console.log('Document successfuly deleted!');
       })
-      .catch(function (error) {
-        console.error("Error removing document: ", error);
+      .catch((error) => {
+        console.error('Error removing document: ', error);
       });
   },
 
-  editar: function (id, data, firestoreDb) {
+  editar(id, data, firestoreDb) {
     firestoreDb
-      .collection("posts")
+      .collection('posts')
       .doc(id)
       .set(data)
-      .then(function () {
-        console.log("Document successfuly edited!");
+      .then(() => {
+        console.log('Document successfuly edited!');
       })
-      .catch(function (error) {
-        console.error("Error removing document: ", error);
+      .catch((error) => {
+        console.error('Error removing document: ', error);
       });
   },
 
-  addPost: function (data, firestoreDb) {
+  addPost(data, firestoreDb) {
     firestoreDb
-      .collection("posts")
+      .collection('posts')
       .add(data)
       .then((docRef) => {
-        console.log("post guardado");
+        console.log('post guardado');
       })
       .catch((error) => {});
   },
-  leerPosts: function () {},
+  leerPosts() {},
 };
 
 export { crud };
