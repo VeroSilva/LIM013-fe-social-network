@@ -1,9 +1,9 @@
-import { logOutEvent } from '../firebase/firebasecontroller.js';
-import { crud } from '../firebase/funcionesGenerales.js';
-import { user } from '../firebase/auth.js';
+import { logOutEvent } from "../firebase/firebasecontroller.js";
+import { crud } from "../firebase/funcionesGenerales.js";
+import { user } from "../firebase/auth.js";
 
 export default () => {
-  const divElem = document.createElement('div');
+  const divElem = document.createElement("div");
   const contenidoTimeline = `
   <div id="Pantalla">
     <div id="cabecera">
@@ -20,30 +20,30 @@ export default () => {
   </div>`;
   divElem.innerHTML = contenidoTimeline;
 
-  const buttonLogout = divElem.querySelector('#buttonLogout');
-  const postUser = divElem.querySelector('#postUser');
-  const sendPost = divElem.querySelector('#sendPost');
-  const tabla = divElem.querySelector('#tabla');
+  const buttonLogout = divElem.querySelector("#buttonLogout");
+  const postUser = divElem.querySelector("#postUser");
+  const sendPost = divElem.querySelector("#sendPost");
+  const tabla = divElem.querySelector("#tabla");
   const firestoreDb = firebase.firestore();
 
-  buttonLogout.addEventListener('click', logOutEvent);
-
-  sendPost.addEventListener('click', () => {
+  buttonLogout.addEventListener("click", logOutEvent);
+  console.log(user().displayName);
+  sendPost.addEventListener("click", () => {
     const messagePost = postUser.value;
     const data = {
       comentario: messagePost,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      displayName: user().displayName,
+      photoURL: user().photoURL,
     };
     crud.addPost(data, firestoreDb);
-    postUser.value = '';
+    postUser.value = "";
   });
 
-  firestoreDb.collection('posts').onSnapshot((querySnapshot) => {
-    tabla.innerHTML = '';
+  firestoreDb.collection("posts").onSnapshot((querySnapshot) => {
+    tabla.innerHTML = "";
     querySnapshot.forEach((doc) => {
       console.log(doc);
-      const div = document.createElement('div');
+      const div = document.createElement("div");
       div.id = `db_${doc.id}`;
       div.innerHTML = `
       <div class="userData">
@@ -56,17 +56,17 @@ export default () => {
         <button>Editar</button>
       </div>
       `;
-      const buttonEliminar = div.querySelectorAll('button')[0];
-      const buttonEditar = div.querySelectorAll('button')[1];
-      const input = div.querySelector('input');
-      buttonEliminar.addEventListener('click', (button) => {
+      const buttonEliminar = div.querySelectorAll("button")[0];
+      const buttonEditar = div.querySelectorAll("button")[1];
+      const input = div.querySelector("input");
+      buttonEliminar.addEventListener("click", (button) => {
         crud.eliminar(doc.id, firestoreDb);
       });
 
-      buttonEditar.addEventListener('click', (button) => {
+      buttonEditar.addEventListener("click", (button) => {
         if (input.disabled) {
           input.disabled = false;
-          buttonEditar.innerText = 'Guardar';
+          buttonEditar.innerText = "Guardar";
         } else {
           input.disabled = true;
           const data = {

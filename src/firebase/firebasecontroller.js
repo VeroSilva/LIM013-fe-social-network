@@ -1,19 +1,20 @@
-import { logOut, loginGoogle } from './auth.js';
+import { logOut, loginGoogle, user } from "./auth.js";
 
 export const logOutEvent = () => {
-  logOut()
-    .then(() => {
-      window.location.assign('#/');
-      console.log('¡Se cerró, lo logramos!');
-    });
+  logOut().then(() => {
+    window.location.assign("#/");
+    console.log("¡Se cerró, lo logramos!");
+  });
 };
 
 export const loginGoogleEvent = () => {
   loginGoogle()
-    .then(() => {
-      console.log('entroo');
-      // user = result.user;
-      window.location.hash = '#/timeline';
+    .then((result) => {
+      console.log("entroo");
+      let usuario = result;
+      console.log(usuario);
+      window.location.hash = "#/timeline";
+      console.log(user());
     })
     .catch((err) => {
       console.log(err);
