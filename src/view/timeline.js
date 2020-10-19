@@ -3,11 +3,18 @@ import { crud } from "../firebase/funcionesGenerales.js";
 import { user } from "../firebase/auth.js";
 
 export default () => {
-  const divElem = document.createElement("div");
   const contenidoTimeline = `
   <div id="Pantalla">
     <div id="cabecera">
-      <img src="https://img.icons8.com/color/48/000000/user-female-circle.png"/>
+      <img id=imageProfile src="https://img.icons8.com/color/48/000000/user-female-circle.png"/>
+      <div class="modalProfile">
+        <div class="modal">
+          <h2>Datos del usuario</h2>
+          <label for="name">Name:</label>
+          <input type="text" name="name">
+          <input type="file" placeholder="Foto de perfil" id="fotoUser">
+          <button>Guardar cambios</button>
+          <span class="modalClose">x</span>
       <div class="logotipoTimeline"><img src="images/logo-RedSocial.png"></div>
       <button type="submit" id="buttonLogout">Cerrar sesión</button>
     </div>
@@ -18,13 +25,24 @@ export default () => {
     <div id="tabla">
     </div>
   </div>`;
+  const divElem = document.createElement("div");
   divElem.innerHTML = contenidoTimeline;
 
+
+  const imageProfile = divElem.querySelector("#fotoUser");
   const buttonLogout = divElem.querySelector("#buttonLogout");
   const postUser = divElem.querySelector("#postUser");
   const sendPost = divElem.querySelector("#sendPost");
   const tabla = divElem.querySelector("#tabla");
   const firestoreDb = firebase.firestore();
+
+  imageProfile.addEventListener("change", () => {
+    const imagesUpload = imageProfile.files[0];
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef
+      .child("images/" + imagesUpload.name)
+      .put(imagesUpload);
+  });
 
   buttonLogout.addEventListener("click", logOutEvent);
   console.log(user().displayName);

@@ -9,7 +9,6 @@ export default () => {
         <input type="text" placeholder="Nombre" id="displayName">
         <input type="text" placeholder="Correo electrónico" id="usuarioSignUp">
         <input type="text" placeholder="Contraseña" id="contraseñaSignUp">
-        <input type="file" placeholder="Foto de perfil" id="fotoUser">
         <button type="submit" id="buttonSignUp">Registrate</button>
         <div id="errorMessage"></div>
         </div>
