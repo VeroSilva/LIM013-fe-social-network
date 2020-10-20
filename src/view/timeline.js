@@ -1,6 +1,6 @@
-import { logOutEvent } from "../firebase/firebasecontroller.js";
-import { crud } from "../firebase/funcionesGenerales.js";
-import { user } from "../firebase/auth.js";
+import { logOutEvent } from '../firebase/firebasecontroller.js';
+import { crud } from '../firebase/funcionesGenerales.js';
+import { user } from '../firebase/auth.js';
 
 export default () => {
   const contenidoTimeline = `
@@ -26,44 +26,43 @@ export default () => {
     <div id="tabla">
     </div>
   </div>`;
-  const divElem = document.createElement("div");
+  const divElem = document.createElement('div');
   divElem.innerHTML = contenidoTimeline;
 
-  const modalClose = divElem.querySelector("#modalClose");
-  const imageProfile = divElem.querySelector("#imageProfile");
-  const fotoUser = divElem.querySelector("#fotoUser");
-  const buttonLogout = divElem.querySelector("#buttonLogout");
-  const postUser = divElem.querySelector("#postUser");
-  const sendPost = divElem.querySelector("#sendPost");
-  const tabla = divElem.querySelector("#tabla");
+  const modalProfile = divElem.querySelector('#modalProfile');
+  const modalClose = divElem.querySelector('#modalClose');
+  const imageProfile = divElem.querySelector('#imageProfile');
+  const fotoUser = divElem.querySelector('#fotoUser');
+  const buttonLogout = divElem.querySelector('#buttonLogout');
+  const postUser = divElem.querySelector('#postUser');
+  const sendPost = divElem.querySelector('#sendPost');
+  const tabla = divElem.querySelector('#tabla');
   const firestoreDb = firebase.firestore();
 
-  modalClose.addEventListener("click", () => {
-    modalProfile.classList.add("hide");
-    modalProfile.classList.remove("display");
-    modalProfile.classList.remove("modalProfile");
-    console.log("si das clic");
-  })
-  
-  imageProfile.addEventListener("click", () => {
-    const modalProfile = divElem.querySelector("#modalProfile");
-    modalProfile.classList.add("display");
-    modalProfile.classList.add("modalProfile");
-    modalProfile.classList.remove("hide"); 
-  console.log("hola");
-  })
+  modalClose.addEventListener('click', () => {
+    modalProfile.classList.add('hide');
+    modalProfile.classList.remove('display');
+    modalProfile.classList.remove('modalProfile');
+    console.log('si das clic');
+  });
 
-  fotoUser.addEventListener("change", () => {
+  imageProfile.addEventListener('click', () => {
+    modalProfile.classList.add('display');
+    modalProfile.classList.add('modalProfile');
+    modalProfile.classList.remove('hide');
+    console.log('hola');
+  });
+
+  fotoUser.addEventListener('change', () => {
     const imagesUpload = fotoUser.files[0];
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef
-      .child("images/" + imagesUpload.name)
+      .child(`images/${imagesUpload.name}`)
       .put(imagesUpload);
   });
 
-  buttonLogout.addEventListener("click", logOutEvent);
-  console.log(user().displayName);
-  sendPost.addEventListener("click", () => {
+  buttonLogout.addEventListener('click', logOutEvent);
+  sendPost.addEventListener('click', () => {
     const messagePost = postUser.value;
     const data = {
       comentario: messagePost,
@@ -71,14 +70,14 @@ export default () => {
       photoURL: user().photoURL,
     };
     crud.addPost(data, firestoreDb);
-    postUser.value = "";
+    postUser.value = '';
   });
 
-  firestoreDb.collection("posts").onSnapshot((querySnapshot) => {
-    tabla.innerHTML = "";
+  firestoreDb.collection('posts').onSnapshot((querySnapshot) => {
+    tabla.innerHTML = '';
     querySnapshot.forEach((doc) => {
       console.log(doc);
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       div.id = `db_${doc.id}`;
       div.innerHTML = `
       <div class="userData">
@@ -91,17 +90,17 @@ export default () => {
         <button>Editar</button>
       </div>
       `;
-      const buttonEliminar = div.querySelectorAll("button")[0];
-      const buttonEditar = div.querySelectorAll("button")[1];
-      const input = div.querySelector("input");
-      buttonEliminar.addEventListener("click", (button) => {
+      const buttonEliminar = div.querySelectorAll('button')[0];
+      const buttonEditar = div.querySelectorAll('button')[1];
+      const input = div.querySelector('input');
+      buttonEliminar.addEventListener('click', (button) => {
         crud.eliminar(doc.id, firestoreDb);
       });
 
-      buttonEditar.addEventListener("click", (button) => {
+      buttonEditar.addEventListener('click', (button) => {
         if (input.disabled) {
           input.disabled = false;
-          buttonEditar.innerText = "Guardar";
+          buttonEditar.innerText = 'Guardar';
         } else {
           input.disabled = true;
           const data = {

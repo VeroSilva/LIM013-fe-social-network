@@ -214,7 +214,7 @@ a {
   justify-content: center;
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0,0.70);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal {
@@ -253,7 +253,7 @@ a {
 }
 
 .modalClose {
-  background: #F29E4C;
+  background: #f29e4c;
   border-radius: 50%;
   width: 20px;
   color: white;

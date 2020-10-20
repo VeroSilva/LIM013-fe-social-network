@@ -1,4 +1,4 @@
-import { createUserAccount, loginUser } from "../firebase/auth.js";
+import { createUserAccount, loginUser } from '../firebase/auth.js';
 
 export default () => {
   const viewRegistro = `
@@ -15,24 +15,24 @@ export default () => {
         <div class="iniciaSesion"><p>¿Ya tienes una cuenta?</p><a href="#/">Inicia Sesión</a></div>
     </div>`;
 
-  const divElem = document.createElement("div");
+  const divElem = document.createElement('div');
   divElem.innerHTML = viewRegistro;
 
-  const fotoUserSignUp = divElem.querySelector("#fotoUser");
-  fotoUserSignUp.addEventListener("change", () => {
+  const fotoUserSignUp = divElem.querySelector('#fotoUser');
+  fotoUserSignUp.addEventListener('change', () => {
     const imagesUpload = fotoUserSignUp.files[0];
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef
-      .child("images/" + imagesUpload.name)
+      .child(`images/${imagesUpload.name}`)
       .put(imagesUpload);
   });
 
-  const buttonSignUp = divElem.querySelector("#buttonSignUp");
-  buttonSignUp.addEventListener("click", () => {
-    const userNameSignUp = divElem.querySelector("#displayName").value;
-    const usuarioSignUp = divElem.querySelector("#usuarioSignUp").value;
-    const passwordSignUp = divElem.querySelector("#contraseñaSignUp").value;
-    const fotoUserSignUp = divElem.querySelector("#fotoUser").value;
+  const buttonSignUp = divElem.querySelector('#buttonSignUp');
+  buttonSignUp.addEventListener('click', () => {
+    const userNameSignUp = divElem.querySelector('#displayName').value;
+    const usuarioSignUp = divElem.querySelector('#usuarioSignUp').value;
+    const passwordSignUp = divElem.querySelector('#contraseñaSignUp').value;
+    const fotoUserSignUp = divElem.querySelector('#fotoUser').value;
     console.log(fotoUserSignUp);
     createUserAccount(usuarioSignUp, passwordSignUp)
       .then((userCredential) => {
@@ -46,7 +46,7 @@ export default () => {
           });
       })
       .catch((error) => {
-        const errorContainer = divElem.querySelector("#errorMessage");
+        const errorContainer = divElem.querySelector('#errorMessage');
         const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
         errorContainer.innerHTML = templateError;
       });
