@@ -32,8 +32,7 @@ export default () => {
     const userNameSignUp = divElem.querySelector('#displayName').value;
     const usuarioSignUp = divElem.querySelector('#usuarioSignUp').value;
     const passwordSignUp = divElem.querySelector('#contraseñaSignUp').value;
-    const fotoUserSignUp = divElem.querySelector('#fotoUser').value;
-    console.log(fotoUserSignUp);
+
     createUserAccount(usuarioSignUp, passwordSignUp)
       .then((userCredential) => {
         userCredential.user

@@ -38,6 +38,7 @@ export default () => {
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
   const firestoreDb = firebase.firestore();
+  const currentUser = firebase.auth().currentUser;
 
   modalClose.addEventListener('click', () => {
     modalProfile.classList.add('hide');
@@ -53,12 +54,21 @@ export default () => {
     console.log('hola');
   });
 
-  fotoUser.addEventListener('change', () => {
+  fotoUser.addEventListener('change', async () => {
     const imagesUpload = fotoUser.files[0];
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef
-      .child(`images/${imagesUpload.name}`)
-      .put(imagesUpload);
+
+    try {
+      const uploadResult = await storageRef
+        .child(`images/${imagesUpload.name}`)
+        .put(imagesUpload);
+      const downloadUrl = await uploadResult.ref.getDownloadURL();
+      await currentUser.updateProfile({
+        photoURL: downloadUrl,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   buttonLogout.addEventListener('click', logOutEvent);
@@ -76,7 +86,6 @@ export default () => {
   firestoreDb.collection('posts').onSnapshot((querySnapshot) => {
     tabla.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      console.log(doc);
       const div = document.createElement('div');
       div.id = `db_${doc.id}`;
       div.innerHTML = `
@@ -113,6 +122,5 @@ export default () => {
       tabla.appendChild(div);
     });
   });
-  // console.log(user.email);
   return divElem;
 };
