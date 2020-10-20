@@ -18,6 +18,14 @@ button {
   font-size: 14px;
 }
 
+.display {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 .cabecera img {
   width: 100%;
 }
@@ -196,6 +204,62 @@ a {
   width: 100%;
   margin: 10px 0px;
 }
+
+.modalProfile {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0,0.70);
+}
+
+.modal {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.modal * {
+  margin: 7px 0px;
+}
+
+.modal input[type="text"] {
+  border: none;
+  background: #f0f0f0;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.modal button {
+  border: none;
+  background: #efea5a;
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.modal input#fotoUser {
+  border: none;
+}
+
+.modalClose {
+  background: #F29E4C;
+  border-radius: 50%;
+  width: 20px;
+  color: white;
+  height: 20px;
+}
+
 @media only screen and (min-width: 500px) {
   main {
     min-height: 850px;

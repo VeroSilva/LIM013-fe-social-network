@@ -6,17 +6,18 @@ export default () => {
   const contenidoTimeline = `
   <div id="Pantalla">
     <div id="cabecera">
-      <img id=imageProfile src="https://img.icons8.com/color/48/000000/user-female-circle.png"/>
-      <div class="modalProfile">
-        <div class="modal">
-          <h2>Datos del usuario</h2>
-          <label for="name">Name:</label>
-          <input type="text" name="name">
-          <input type="file" placeholder="Foto de perfil" id="fotoUser">
-          <button>Guardar cambios</button>
-          <span class="modalClose">x</span>
+      <img id="imageProfile" src="https://img.icons8.com/color/48/000000/user-female-circle.png"/>
       <div class="logotipoTimeline"><img src="images/logo-RedSocial.png"></div>
       <button type="submit" id="buttonLogout">Cerrar sesión</button>
+    </div>
+    <div class="hide" id="modalProfile">
+      <div class="modal">
+        <h2>Datos del usuario</h2>
+        <input type="text" placeholder="To update name" name="name">
+        <input type="file" placeholder="Foto de perfil" id="fotoUser">
+        <button>To update</button>
+        <span id="modalClose" class="modalClose">x</span>
+      </div>
     </div>
     <div class="prepost">
       <input type="text" placeholder="¿Como te sientes hoy?" id="postUser">
@@ -28,16 +29,32 @@ export default () => {
   const divElem = document.createElement("div");
   divElem.innerHTML = contenidoTimeline;
 
-
-  const imageProfile = divElem.querySelector("#fotoUser");
+  const modalClose = divElem.querySelector("#modalClose");
+  const imageProfile = divElem.querySelector("#imageProfile");
+  const fotoUser = divElem.querySelector("#fotoUser");
   const buttonLogout = divElem.querySelector("#buttonLogout");
   const postUser = divElem.querySelector("#postUser");
   const sendPost = divElem.querySelector("#sendPost");
   const tabla = divElem.querySelector("#tabla");
   const firestoreDb = firebase.firestore();
 
-  imageProfile.addEventListener("change", () => {
-    const imagesUpload = imageProfile.files[0];
+  modalClose.addEventListener("click", () => {
+    modalProfile.classList.add("hide");
+    modalProfile.classList.remove("display");
+    modalProfile.classList.remove("modalProfile");
+    console.log("si das clic");
+  })
+  
+  imageProfile.addEventListener("click", () => {
+    const modalProfile = divElem.querySelector("#modalProfile");
+    modalProfile.classList.add("display");
+    modalProfile.classList.add("modalProfile");
+    modalProfile.classList.remove("hide"); 
+  console.log("hola");
+  })
+
+  fotoUser.addEventListener("change", () => {
+    const imagesUpload = fotoUser.files[0];
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef
       .child("images/" + imagesUpload.name)
