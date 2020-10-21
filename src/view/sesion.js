@@ -1,4 +1,4 @@
-import { loginUser, user } from '../firebase/auth.js';
+import { loginUser } from '../firebase/auth.js';
 import { loginGoogleEvent } from '../firebase/firebasecontroller.js';
 
 // import { loginGoogleEvent } from "../firebase/firebasecontroller.js";
@@ -35,10 +35,7 @@ export default () => {
     const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
     loginUser(usuarioSignIn, passwordSignIn)
-      .then((userCredential) => {
-        // console.log(userCredential);
-        // user = userCredential.user;
-        console.log(user);
+      .then(() => {
         window.location.assign('#/timeline');
       })
       .catch((error) => {
