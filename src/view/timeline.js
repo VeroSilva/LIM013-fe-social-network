@@ -13,9 +13,9 @@ export default () => {
     <div class="hide" id="modalProfile">
       <div class="modal">
         <h2>Datos del usuario</h2>
-        <input type="text" placeholder="To update name" name="name">
+        <input type="text" placeholder="To update name" name="name" id="nameUser">
         <input type="file" placeholder="Foto de perfil" id="fotoUser">
-        <button>To update</button>
+        <button id="updateButton">Update</button>
         <span id="modalClose" class="modalClose">x</span>
       </div>
     </div>
@@ -37,6 +37,7 @@ export default () => {
   const postUser = divElem.querySelector('#postUser');
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
+  const updateButton = divElem.querySelector('#updateButton');
   const firestoreDb = firebase.firestore();
   const currentUser = firebase.auth().currentUser;
 
@@ -44,19 +45,18 @@ export default () => {
     modalProfile.classList.add('hide');
     modalProfile.classList.remove('display');
     modalProfile.classList.remove('modalProfile');
-    console.log('si das clic');
   });
 
   imageProfile.addEventListener('click', () => {
     modalProfile.classList.add('display');
     modalProfile.classList.add('modalProfile');
     modalProfile.classList.remove('hide');
-    console.log('hola');
   });
 
-  fotoUser.addEventListener('change', async () => {
+  updateButton.addEventListener('click', async () => {
     const imagesUpload = fotoUser.files[0];
     const storageRef = firebase.storage().ref();
+    const nameUser = divElem.querySelector('#nameUser').value;
 
     try {
       const uploadResult = await storageRef
@@ -65,6 +65,7 @@ export default () => {
       const downloadUrl = await uploadResult.ref.getDownloadURL();
       await currentUser.updateProfile({
         photoURL: downloadUrl,
+        displayName: nameUser,
       });
     } catch (err) {
       console.error(err);
@@ -102,11 +103,11 @@ export default () => {
       const buttonEliminar = div.querySelectorAll('button')[0];
       const buttonEditar = div.querySelectorAll('button')[1];
       const input = div.querySelector('input');
-      buttonEliminar.addEventListener('click', (button) => {
+      buttonEliminar.addEventListener('click', () => {
         crud.eliminar(doc.id, firestoreDb);
       });
 
-      buttonEditar.addEventListener('click', (button) => {
+      buttonEditar.addEventListener('click', () => {
         if (input.disabled) {
           input.disabled = false;
           buttonEditar.innerText = 'Guardar';
