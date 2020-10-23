@@ -18,15 +18,6 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewRegistro;
 
-  const fotoUserSignUp = divElem.querySelector('#fotoUser');
-  fotoUserSignUp.addEventListener('change', () => {
-    const imagesUpload = fotoUserSignUp.files[0];
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef
-      .child(`images/${imagesUpload.name}`)
-      .put(imagesUpload);
-  });
-
   const buttonSignUp = divElem.querySelector('#buttonSignUp');
   buttonSignUp.addEventListener('click', () => {
     const userNameSignUp = divElem.querySelector('#displayName').value;
