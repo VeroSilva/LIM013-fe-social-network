@@ -1,4 +1,5 @@
-import { createUserAccount, loginUser } from '../firebase/auth.js';
+import { createUserAccount } from '../firebase/auth.js';
+import { loginUserEvent } from '../firebase/firebasecontroller.js';
 
 export default () => {
   const viewRegistro = `
@@ -29,10 +30,9 @@ export default () => {
         userCredential.user
           .updateProfile({
             displayName: userNameSignUp,
-            // photo: el storage lo relaciono con el id;
           })
           .then(() => {
-            loginUser(usuarioSignUp, passwordSignUp);
+            loginUserEvent(usuarioSignUp, passwordSignUp);
           });
       })
       .catch((error) => {

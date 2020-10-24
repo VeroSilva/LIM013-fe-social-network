@@ -1,13 +1,11 @@
-export const createUserAccount = (usuarioSignUp, passwordSignUp) => firebase.auth().createUserWithEmailAndPassword(usuarioSignUp, passwordSignUp);
+export const createUserAccount = (usuarioSignUp, passwordSignUp) => firebase.auth()
+  .createUserWithEmailAndPassword(usuarioSignUp, passwordSignUp);
 
 export const user = () => firebase.auth().currentUser;
 
 export const loginUser = (usuarioSignIn, passwordSignIn) => firebase
   .auth()
-  .signInWithEmailAndPassword(usuarioSignIn, passwordSignIn)
-  .then(() => {
-    window.location.assign('#/timeline');
-  });
+  .signInWithEmailAndPassword(usuarioSignIn, passwordSignIn);
 
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();

@@ -1,22 +1,30 @@
-import { logOut, loginGoogle, user } from './auth.js';
+import { logOut, loginGoogle, loginUser } from './auth.js';
 
 export const logOutEvent = () => {
   logOut().then(() => {
     window.location.assign('#/');
-    console.log('¡Se cerró, lo logramos!');
   });
 };
 
 export const loginGoogleEvent = () => {
   loginGoogle()
-    .then((result) => {
-      console.log('entroo');
-      const usuario = result;
-      console.log(usuario);
+    .then(() => {
       window.location.hash = '#/timeline';
-      console.log(user());
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+export const loginUserEvent = (user, password, divElem) => {
+  loginUser(user, password)
+    .then((userCredential) => {
+      console.log(`estas son mis credenciales${userCredential}`);
+      window.location.assign('#/timeline');
+    })
+    .catch((err) => {
+      const errorContainer = divElem.querySelector('#errorMessage');
+      const templateError = `<div class="modal-error"><p>Hubo un problema: ${err.message}</p></div>`;
+      errorContainer.innerHTML = templateError;
     });
 };
