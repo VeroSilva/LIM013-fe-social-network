@@ -1,5 +1,5 @@
 import { logOutEvent } from '../firebase/firebasecontroller.js';
-import { crud } from '../firebase/funcionesGenerales.js';
+import { crud, getDataSnapshot } from '../firebase/funcionesGenerales.js';
 import { user } from '../firebase/auth.js';
 
 export default () => {
@@ -38,7 +38,6 @@ export default () => {
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
-  const firestoreDb = firebase.firestore();
   const currentUser = firebase.auth().currentUser;
 
   modalClose.addEventListener('click', () => {
@@ -53,23 +52,10 @@ export default () => {
     modalProfile.classList.remove('hide');
   });
 
-  updateButton.addEventListener('click', async () => {
+  updateButton.addEventListener('click',  () => {
     const imagesUpload = fotoUser.files[0];
-    const storageRef = firebase.storage().ref();
     const nameUser = divElem.querySelector('#nameUser').value;
-
-    try {
-      const uploadResult = await storageRef
-        .child(`images/${imagesUpload.name}`)
-        .put(imagesUpload);
-      const downloadUrl = await uploadResult.ref.getDownloadURL();
-      await currentUser.updateProfile({
-        photoURL: downloadUrl,
-        displayName: nameUser,
-      });
-    } catch (err) {
-      console.error(err);
-    }
+    crud.updateImage(imagesUpload,nameUser);
   });
 
   buttonLogout.addEventListener('click', logOutEvent);
@@ -79,12 +65,12 @@ export default () => {
       comentario: messagePost,
       displayName: user().displayName,
       photoURL: user().photoURL,
+      userid: user().uid
     };
-    crud.addPost(data, firestoreDb);
+    crud.addPost(data);
     postUser.value = '';
   });
-
-  firestoreDb.collection('posts').onSnapshot((querySnapshot) => {
+  getDataSnapshot('posts', (querySnapshot) => {
     tabla.innerHTML = '';
     querySnapshot.forEach((doc) => {
       const div = document.createElement('div');
@@ -96,15 +82,21 @@ export default () => {
       </div>
       <input value="${doc.data().comentario}" disabled class="postedMessage">
       <div class="buttonsData">
-        <button>Eliminar</button>
         <button>Editar</button>
+        <button>Eliminar</button>
       </div>
       `;
-      const buttonEliminar = div.querySelectorAll('button')[0];
-      const buttonEditar = div.querySelectorAll('button')[1];
+      const buttonEliminar = div.querySelectorAll('button')[1];
+      const buttonEditar = div.querySelectorAll('button')[0];
       const input = div.querySelector('input');
+
+      if (!(doc.data().userid === currentUser.uid)) {
+        buttonEliminar.classList.add('hide');
+        buttonEditar.classList.add('hide');
+      }
+
       buttonEliminar.addEventListener('click', () => {
-        crud.eliminar(doc.id, firestoreDb);
+        crud.eliminar(doc.id);
       });
 
       buttonEditar.addEventListener('click', () => {
@@ -116,7 +108,7 @@ export default () => {
           const data = {
             comentario: input.value,
           };
-          crud.editar(doc.id, data, firestoreDb);
+          crud.editar(doc.id, data);
         }
       });
 

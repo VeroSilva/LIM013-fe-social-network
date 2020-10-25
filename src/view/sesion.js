@@ -1,5 +1,4 @@
-import { loginUser } from '../firebase/auth.js';
-import { loginGoogleEvent } from '../firebase/firebasecontroller.js';
+import { loginGoogleEvent, loginUserEvent } from '../firebase/firebasecontroller.js';
 
 // import { loginGoogleEvent } from "../firebase/firebasecontroller.js";
 
@@ -34,16 +33,8 @@ export default () => {
   buttonSignIn.addEventListener('click', () => {
     const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
-    loginUser(usuarioSignIn, passwordSignIn)
-      .then(() => {
-        window.location.assign('#/timeline');
-      })
-      .catch((error) => {
-        const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
-        errorContainer.innerHTML = templateError;
-      });
+     loginUserEvent(usuarioSignIn, passwordSignIn, errorContainer);
   });
-
   buttonGoogle.addEventListener('click', loginGoogleEvent);
 
   return divElem;
