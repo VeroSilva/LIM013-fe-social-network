@@ -30,6 +30,7 @@ export default () => {
         userCredential.user
           .updateProfile({
             displayName: userNameSignUp,
+            photoURL: '../images/user.png',
           })
           .then(() => {
             loginUserEvent(usuarioSignUp, passwordSignUp);
