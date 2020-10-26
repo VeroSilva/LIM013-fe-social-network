@@ -33,7 +33,7 @@ export default () => {
   buttonSignIn.addEventListener('click', () => {
     const usuarioSignIn = divElem.querySelector('#usuarioSignIn').value;
     const passwordSignIn = divElem.querySelector('#contraseñaSignIn').value;
-     loginUserEvent(usuarioSignIn, passwordSignIn, errorContainer);
+    loginUserEvent(usuarioSignIn, passwordSignIn, errorContainer);
   });
   buttonGoogle.addEventListener('click', loginGoogleEvent);
 

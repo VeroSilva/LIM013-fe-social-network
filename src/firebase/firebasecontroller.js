@@ -1,4 +1,6 @@
-import { logOut, loginGoogle, user, loginUser } from './auth.js';
+import {
+  logOut, loginGoogle, user, loginUser,
+} from './auth.js';
 
 export const logOutEvent = () => {
   logOut().then(() => {
@@ -6,7 +8,6 @@ export const logOutEvent = () => {
     console.log('¡Se cerró, lo logramos!');
   });
 };
-
 export const loginGoogleEvent = () => {
   loginGoogle()
     .then((result) => {
@@ -22,11 +23,11 @@ export const loginGoogleEvent = () => {
 };
 export const loginUserEvent = (user, password, errorContainer) => {
   loginUser(user, password)
-  .then(() => {
-    window.location.assign('#/timeline');
-  })
-  .catch((error) => {
-    const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
-    errorContainer.innerHTML = templateError;
-  });
+    .then(() => {
+      window.location.assign('#/timeline');
+    })
+    .catch((error) => {
+      const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
+      errorContainer.innerHTML = templateError;
+    });
 };

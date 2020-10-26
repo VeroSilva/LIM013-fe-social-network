@@ -1,4 +1,5 @@
-import { createUserAccount, loginUser } from '../firebase/auth.js';
+import { createUserAccount } from '../firebase/auth.js';
+import { loginUserEvent } from '../firebase/firebasecontroller.js';
 
 export default () => {
   const viewRegistro = `
@@ -18,15 +19,6 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewRegistro;
 
-  const fotoUserSignUp = divElem.querySelector('#fotoUser');
-  fotoUserSignUp.addEventListener('change', () => {
-    const imagesUpload = fotoUserSignUp.files[0];
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef
-      .child(`images/${imagesUpload.name}`)
-      .put(imagesUpload);
-  });
-
   const buttonSignUp = divElem.querySelector('#buttonSignUp');
   buttonSignUp.addEventListener('click', () => {
     const userNameSignUp = divElem.querySelector('#displayName').value;
@@ -38,10 +30,10 @@ export default () => {
         userCredential.user
           .updateProfile({
             displayName: userNameSignUp,
-            // photo: el storage lo relaciono con el id;
+            photoURL: '../images/user.png',
           })
           .then(() => {
-            loginUser(usuarioSignUp, passwordSignUp);
+            loginUserEvent(usuarioSignUp, passwordSignUp);
           });
       })
       .catch((error) => {
