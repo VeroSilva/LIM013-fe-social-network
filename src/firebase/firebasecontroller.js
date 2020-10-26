@@ -1,30 +1,33 @@
-import { logOut, loginGoogle, loginUser } from './auth.js';
+import {
+  logOut, loginGoogle, user, loginUser,
+} from './auth.js';
 
 export const logOutEvent = () => {
   logOut().then(() => {
     window.location.assign('#/');
+    console.log('¡Se cerró, lo logramos!');
   });
 };
-
 export const loginGoogleEvent = () => {
   loginGoogle()
-    .then(() => {
+    .then((result) => {
+      console.log('entroo');
+      const usuario = result;
+      console.log(usuario);
       window.location.hash = '#/timeline';
+      console.log(user());
     })
     .catch((err) => {
       console.log(err);
     });
 };
-
-export const loginUserEvent = (user, password, divElem) => {
+export const loginUserEvent = (user, password, errorContainer) => {
   loginUser(user, password)
-    .then((userCredential) => {
-      console.log(`estas son mis credenciales${userCredential}`);
+    .then(() => {
       window.location.assign('#/timeline');
     })
-    .catch((err) => {
-      const errorContainer = divElem.querySelector('#errorMessage');
-      const templateError = `<div class="modal-error"><p>Hubo un problema: ${err.message}</p></div>`;
+    .catch((error) => {
+      const templateError = `<div class="modal-error"><p>Hubo un problema: ${error.message}</p></div>`;
       errorContainer.innerHTML = templateError;
     });
 };
