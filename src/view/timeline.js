@@ -26,8 +26,10 @@ export default () => {
     <div id="tabla">
     </div>
   </div>`;
+
   const divElem = document.createElement('div');
   divElem.innerHTML = contenidoTimeline;
+
   const modalProfile = divElem.querySelector('#modalProfile');
   const modalClose = divElem.querySelector('#modalClose');
   const imageProfile = divElem.querySelector('#imageProfile');
@@ -38,6 +40,7 @@ export default () => {
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
   const currentUser = firebase.auth().currentUser;
+
   modalClose.addEventListener('click', () => {
     modalProfile.classList.add('hide');
     modalProfile.classList.remove('display');
@@ -52,6 +55,10 @@ export default () => {
     const imagesUpload = fotoUser.files[0];
     const nameUser = divElem.querySelector('#nameUser').value;
     crud.updateImage(imagesUpload, nameUser);
+
+    modalProfile.classList.add('hide');
+    modalProfile.classList.remove('display');
+    modalProfile.classList.remove('modalProfile');
   });
   buttonLogout.addEventListener('click', logOutEvent);
   sendPost.addEventListener('click', () => {
