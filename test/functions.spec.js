@@ -24,44 +24,17 @@ describe.only('Agregar post', () => {
     // en firestore  no existe un post con el comentario `comentario`
     firebase.firestore().collection('posts').get()
       .then((result) => {
+        console.log(result.data);
         expect(Object.values(result.data).filter((p) => p.comentario === data.comentario).length).toBe(0);
-        crud.addPost(data, firebase.firestore())
-          .then((docRef) => {
-            // en firestore existe un post con el comentario `comentario`
-            firebase.firestore().collection('posts').get()
-              .then((result2) => {
-                expect(Object.values(result2.data).filter((p) => p.comentario === data.comentario).length).toBe(1);
-                done();
-                
-              });
-          });
-        
+        return crud.addPost(data)      
       })
-
+      .then((docRef) => {
+        // en firestore existe un post con el comentario `comentario`
+        return firebase.firestore().collection('posts').get()
+      })
+      .then((result2) => {
+        expect(Object.values(result2.data).filter((p) => p.comentario === data.comentario).length).toBe(1);
+        done();
+      });
   });
-it('should edit a post',(done) => {
-  const data = {
-    comentario: 'comentario',
-    displayName: 'name',
-    photoURL: 'http://',
-  }
-  // en firestore edita un post 
-  firebase.firestore().collection('posts').get()
-    .then((result) => {
-      expect(Object.values(result.data).filter((p) => p.comentario === data.comentario).length).toBe(0);
-      crud.editar(data, id, firebase.firestore())
-        .then(() => {
-          // en firestore exi un post con el comentario `comentario`
-          firebase.firestore().collection('posts').get()
-            .then((result2) => {
-              expect(Object.values(result2.data).filter((p) => p.comentario === data.comentario).length).toBe(1);
-              done();
-              
-            });
-        });
-      
-    })
-
 });
-});
-

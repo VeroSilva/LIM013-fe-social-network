@@ -17,7 +17,7 @@ export default () => {
         <button type="submit" id="buttonSignIn">Iniciar sesión</button>
         <div id="errorMessage"></div>
         </div>
-        <p class="textoSignIn">Iniciar sesión con Google o Facebook</p>
+        <p class="textoSignIn">Iniciar sesión con Google</p>
         <div class="signInRS">
             <img src="images/googleRS.png" id="signGoogle">
         </div>
