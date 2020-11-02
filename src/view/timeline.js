@@ -68,6 +68,7 @@ export default () => {
       displayName: user().displayName,
       photoURL: user().photoURL,
       userid: user().uid,
+      date: new Date(),
     };
     crud.addPost(data);
     postUser.value = '';
