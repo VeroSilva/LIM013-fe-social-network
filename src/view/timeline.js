@@ -12,9 +12,15 @@ export default () => {
     </div>
     <div class="hide" id="modalProfile">
       <div class="modal">
-        <h2>Datos del usuario</h2>
-        <input type="text" placeholder="To update name" name="name" id="nameUser">
-        <input type="file" placeholder="Foto de perfil" id="fotoUser">
+        <h2>Profile</h2>
+        <div class="updateData">
+          <input type="text" placeholder="Update name" name="name" id="nameUser">
+          <input type="file" id="fotoUser" class="hide" />
+          <label for="fotoUser" id="selector" class="labelUpdatePhoto"> 
+            <span class="material-icons">add_photo_alternate</span>
+            Choose a photo 
+          </label>
+        </div>
         <button id="updateButton">Update</button>
         <span id="modalClose" class="modalClose">x</span>
       </div>
@@ -40,6 +46,16 @@ export default () => {
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
   const currentUser = firebase.auth().currentUser;
+
+  const loaderUpdate = (e) => {
+    const file = e.target.files;
+    const show = `<span class="fileSelected">Selected file: </span> ${file[0].name}`;
+    const output = divElem.querySelector('#selector');
+    output.innerHTML = show;
+  };
+
+  const fileInput = divElem.querySelector('#fotoUser');
+  fileInput.addEventListener('change', loaderUpdate);
 
   modalClose.addEventListener('click', () => {
     modalProfile.classList.add('hide');

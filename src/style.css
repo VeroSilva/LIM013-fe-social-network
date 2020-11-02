@@ -13,14 +13,14 @@ body {
 h1,
 h2,
 h3,
-h4,
-label {
+h4 {
   font-family: "Alegreya Sans", sans-serif;
 }
 
 p,
 a,
-button {
+button,
+label {
   font-family: "Lato", sans-serif;
   font-size: 14px;
 }
@@ -265,6 +265,7 @@ a {
   background-color: white;
   padding: 15px;
   border-radius: 10px;
+  position: absolute;
 }
 
 .modal * {
@@ -272,6 +273,7 @@ a {
 }
 
 .modal input[type="text"] {
+  width: 100%;
   border: none;
   background: #f0f0f0;
   padding: 6px;
@@ -290,6 +292,12 @@ a {
   border: none;
 }
 
+.updateData {
+  width: 30%;
+  display: flex;
+  flex-flow: column;
+}
+
 .modalClose {
   background: #f29e4c;
   border-radius: 50%;
@@ -297,6 +305,26 @@ a {
   color: white;
   height: 20px;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  font-family: "Alegreya Sans", sans-serif;
+}
+
+.labelUpdatePhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 5px;
+  width: 200px;
+  background: #efea5a;
+  width: 100%;
+}
+
+.labelUpdatePhoto:hover {
+  transform: scale(1.03);
 }
 
 @media only screen and (min-width: 500px) {
