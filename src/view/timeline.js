@@ -14,11 +14,9 @@ export default () => {
       <div class="modal">
         <h2>Profile</h2>
         <div class="updateData">
-          <input type="text" placeholder="Update name" name="name" id="nameUser">
+          <input type="text" placeholder="Update name" name="name" id="nameUser" />
           <input type="file" id="fotoUser" class="hide" />
           <label for="fotoUser" id="selector" class="labelUpdatePhoto"> 
-            <span class="material-icons">add_photo_alternate</span>
-            Choose a photo 
           </label>
           <div id="preview"></div>
         </div>
@@ -46,7 +44,6 @@ export default () => {
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
-  const fileInput = divElem.querySelector('#fotoUser');
   const currentUser = firebase.auth().currentUser;
 
   const loaderUpdate = (e) => {
@@ -59,7 +56,7 @@ export default () => {
     reader.readAsDataURL(e.target.files[0]);
 
     reader.onload = () => {
-      const preview = document.getElementById('preview');
+      const preview = divElem.querySelector('#preview');
       const image = document.createElement('img');
       image.src = reader.result;
 
@@ -68,7 +65,8 @@ export default () => {
     };
   };
 
-  fileInput.addEventListener('change', loaderUpdate);
+  fotoUser.addEventListener('change', loaderUpdate);
+  divElem.querySelector('#nameUser').value = currentUser.displayName;
 
   modalClose.addEventListener('click', () => {
     modalProfile.classList.add('hide');
@@ -79,6 +77,18 @@ export default () => {
     modalProfile.classList.add('display');
     modalProfile.classList.add('modalProfile');
     modalProfile.classList.remove('hide');
+    const show = `<span class="material-icons">add_photo_alternate</span>
+    Choose a photo`;
+    const output = divElem.querySelector('#selector');
+    output.innerHTML = show;
+    const preview = divElem.querySelector('#preview');
+    const image = document.createElement('img');
+    image.src = currentUser.photoURL;
+    if (preview.childNodes[0]) {
+      preview.replaceChild(image, preview.childNodes[0]);
+    } else {
+      preview.append(image);
+    }
   });
   updateButton.addEventListener('click', () => {
     const imagesUpload = fotoUser.files[0];
