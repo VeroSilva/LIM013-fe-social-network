@@ -1,6 +1,7 @@
 import { logOutEvent } from '../firebase/firebasecontroller.js';
 import { crud, getDataSnapshot } from '../firebase/funcionesGenerales.js';
-import { user } from '../firebase/auth.js';
+import { getCurrentUser } from '../firebase/auth.js';
+
 
 export default () => {
   const contenidoTimeline = `
@@ -44,19 +45,18 @@ export default () => {
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
-  const currentUser = firebase.auth().currentUser;
+  const output = divElem.querySelector('#selector');
+  const preview = divElem.querySelector('#preview');
 
   const loaderUpdate = (e) => {
     const file = e.target.files;
     const show = `<span class="fileSelected">Selected file: </span> ${file[0].name}`;
-    const output = divElem.querySelector('#selector');
     output.innerHTML = show;
 
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
 
     reader.onload = () => {
-      const preview = divElem.querySelector('#preview');
       const image = document.createElement('img');
       image.src = reader.result;
 
@@ -66,7 +66,6 @@ export default () => {
   };
 
   fotoUser.addEventListener('change', loaderUpdate);
-  divElem.querySelector('#nameUser').value = currentUser.displayName;
 
   modalClose.addEventListener('click', () => {
     modalProfile.classList.add('hide');
@@ -74,16 +73,15 @@ export default () => {
     modalProfile.classList.remove('modalProfile');
   });
   imageProfile.addEventListener('click', () => {
+    divElem.querySelector('#nameUser').value = getCurrentUser().displayName;
     modalProfile.classList.add('display');
     modalProfile.classList.add('modalProfile');
     modalProfile.classList.remove('hide');
     const show = `<span class="material-icons">add_photo_alternate</span>
     Choose a photo`;
-    const output = divElem.querySelector('#selector');
     output.innerHTML = show;
-    const preview = divElem.querySelector('#preview');
     const image = document.createElement('img');
-    image.src = currentUser.photoURL;
+    image.src = getCurrentUser().photoURL;
     if (preview.childNodes[0]) {
       preview.replaceChild(image, preview.childNodes[0]);
     } else {
@@ -104,25 +102,34 @@ export default () => {
     const messagePost = postUser.value;
     const data = {
       comentario: messagePost,
-      displayName: user().displayName,
-      photoURL: user().photoURL,
-      userid: user().uid,
+      displayName: getCurrentUser().displayName,
+      photoURL: getCurrentUser().photoURL,
+      userid: getCurrentUser().uid,
       date: new Date(),
+      // fullData: {
+      //   day: dateToday.getDate(),
+      //   month: dateToday.getMonth() + 1,
+      //   year: dateToday.getFullYear(),
+      // },
     };
+    console.log(data);
     crud.addPost(data);
     postUser.value = '';
   });
   getDataSnapshot('posts', (querySnapshot) => {
     tabla.innerHTML = '';
     querySnapshot.forEach((doc) => {
+      const fullDate = new Date(doc.data().date);
+      console.log(doc.data().date.getFullYear);
       const div = document.createElement('div');
       div.id = `db_${doc.id}`;
       div.innerHTML = `
       <div class="userData">
       <img src="${doc.data().photoURL}">
       <label>${doc.data().displayName}</label>
+      <label>${doc.data().date}</label>
       </div>
-      <input value="${doc.data().comentario}" disabled class="postedMessage">
+      <input value="${doc.data().comentario}" disabled class="postedMessage" id="postedMessage">
       <div class="buttonsData">
         <button>Editar</button>
         <button>Eliminar</button>
@@ -131,15 +138,19 @@ export default () => {
       const buttonEliminar = div.querySelectorAll('button')[1];
       const buttonEditar = div.querySelectorAll('button')[0];
       const input = div.querySelector('input');
-      if (!(doc.data().userid === currentUser.uid)) {
+      if (!(doc.data().userid === getCurrentUser().uid)) {
         buttonEliminar.classList.add('hide');
         buttonEditar.classList.add('hide');
       }
       buttonEliminar.addEventListener('click', () => {
         crud.eliminar(doc.id);
       });
-      buttonEditar.addEventListener('click', () => {
+      buttonEditar.addEventListener('click', (e) => {
+        const parentButton = e.target.parentNode;
+        const parentDiv = parentButton.parentNode;
+        const postedMessage = parentDiv.children[1];
         if (input.disabled) {
+          postedMessage.classList.add('editing-post');
           input.disabled = false;
           buttonEditar.innerText = 'Guardar';
         } else {
@@ -147,6 +158,10 @@ export default () => {
           const data = {
             comentario: input.value,
           };
+          postedMessage.classList.remove('editing-post');
+          input.disabled = false;
+          buttonEditar.innerText = 'Editar';
+
           crud.editar(doc.id, data);
         }
       });
