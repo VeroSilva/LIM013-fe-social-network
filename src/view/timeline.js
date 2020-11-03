@@ -20,6 +20,7 @@ export default () => {
             <span class="material-icons">add_photo_alternate</span>
             Choose a photo 
           </label>
+          <div id="preview"></div>
         </div>
         <button id="updateButton">Update</button>
         <span id="modalClose" class="modalClose">x</span>
@@ -45,6 +46,7 @@ export default () => {
   const sendPost = divElem.querySelector('#sendPost');
   const tabla = divElem.querySelector('#tabla');
   const updateButton = divElem.querySelector('#updateButton');
+  const fileInput = divElem.querySelector('#fotoUser');
   const currentUser = firebase.auth().currentUser;
 
   const loaderUpdate = (e) => {
@@ -52,9 +54,20 @@ export default () => {
     const show = `<span class="fileSelected">Selected file: </span> ${file[0].name}`;
     const output = divElem.querySelector('#selector');
     output.innerHTML = show;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = () => {
+      const preview = document.getElementById('preview');
+      const image = document.createElement('img');
+      image.src = reader.result;
+
+      preview.innerHTML = '';
+      preview.append(image);
+    };
   };
 
-  const fileInput = divElem.querySelector('#fotoUser');
   fileInput.addEventListener('change', loaderUpdate);
 
   modalClose.addEventListener('click', () => {
