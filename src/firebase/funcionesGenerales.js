@@ -1,7 +1,7 @@
 const getDb = () => firebase.firestore();
 
 export const getDataSnapshot = (collection, querySnapshot) => {
-  getDb().collection(collection).onSnapshot(querySnapshot);
+  getDb().collection(collection).orderBy('date', 'desc').onSnapshot(querySnapshot);
 };
 
 const crud = {
@@ -22,7 +22,7 @@ const crud = {
     return getDb()
       .collection('posts')
       .doc(id)
-      .set(data, { merge: true })
+      .update(data)
       .then(() => {
         console.log('Document successfuly edited!');
       })
