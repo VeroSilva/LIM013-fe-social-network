@@ -6,7 +6,7 @@ export default () => {
   const contenidoTimeline = `
   <div id="Pantalla">
     <div id="cabecera">
-      <img id="imageProfile" src='../images/user.png'/>
+      <img id="imageProfile" src='images/user.png'/>
       <div class="logotipoTimeline"><img src="images/logo-RedSocial.png"></div>
       <button type="submit" id="buttonLogout">Cerrar sesión</button>
     </div>
