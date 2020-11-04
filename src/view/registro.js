@@ -33,7 +33,7 @@ export default () => {
       .then(userCredential => userCredential.user
         .updateProfile({
           displayName: userNameSignUp,
-          photoURL: '../images/user.png',
+          photoURL: 'images/user.png',
         }))
       .then(() => {
         loginUserEvent(usuarioSignUp, passwordSignUp);
