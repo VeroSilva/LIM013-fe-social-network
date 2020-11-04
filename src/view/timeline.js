@@ -7,7 +7,7 @@ export default () => {
   const contenidoTimeline = `
   <div id="Pantalla">
     <div id="cabecera">
-      <img id="imageProfile" src='../images/user.png'/>
+      <img id="imageProfile" src='https://github.com/VeroSilva/LIM013-fe-social-network/blob/master/src/images/user.png'/>
       <div class="logotipoTimeline"><img src="images/logo-RedSocial.png"></div>
       <button type="submit" id="buttonLogout">Cerrar sesión</button>
     </div>
@@ -107,11 +107,6 @@ export default () => {
       photoURL: getCurrentUser().photoURL,
       userid: getCurrentUser().uid,
       date: dateToday,
-      // fullData: {
-      //   day: dateToday.getDate(),
-      //   month: dateToday.getMonth() + 1,
-      //   year: dateToday.getFullYear(),
-      // },
     };
     console.log(data);
     crud.addPost(data);
