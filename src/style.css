@@ -203,6 +203,19 @@ a {
   border-radius: 50%;
 }
 
+.postInfo {
+  display: grid;
+  justify-items: left;
+}
+
+.postInfo .secondChild {
+  font-size: 16px;
+}
+
+.postInfo .secondChild {
+  font-size: 13px;
+}
+
 #tabla > div {
   margin: 20px auto;
   width: 60%;

@@ -100,12 +100,13 @@ export default () => {
   buttonLogout.addEventListener('click', logOutEvent);
   sendPost.addEventListener('click', () => {
     const messagePost = postUser.value;
+    const dateToday = new Date();
     const data = {
       comentario: messagePost,
       displayName: getCurrentUser().displayName,
       photoURL: getCurrentUser().photoURL,
       userid: getCurrentUser().uid,
-      date: new Date(),
+      date: dateToday,
       // fullData: {
       //   day: dateToday.getDate(),
       //   month: dateToday.getMonth() + 1,
@@ -119,15 +120,17 @@ export default () => {
   getDataSnapshot('posts', (querySnapshot) => {
     tabla.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const fullDate = new Date(doc.data().date);
-      console.log(doc.data().date.getFullYear);
+      const fullDate = new Date(doc.data().date.seconds * 1000); // Wed Jan 12 2011 12:42:46 GMT-0800 (PST)
+
       const div = document.createElement('div');
       div.id = `db_${doc.id}`;
       div.innerHTML = `
       <div class="userData">
       <img src="${doc.data().photoURL}">
-      <label>${doc.data().displayName}</label>
-      <label>${doc.data().date}</label>
+      <div class="postInfo">
+        <label class="firstChild">${doc.data().displayName}</label>
+        <label class="secondChild">${fullDate.getDate()}/${fullDate.getMonth() + 1}/${fullDate.getFullYear()}</label>
+      </div>
       </div>
       <input value="${doc.data().comentario}" disabled class="postedMessage" id="postedMessage">
       <div class="buttonsData">
@@ -158,8 +161,9 @@ export default () => {
           const data = {
             comentario: input.value,
           };
+
           postedMessage.classList.remove('editing-post');
-          input.disabled = false;
+          input.disabled = true;
           buttonEditar.innerText = 'Editar';
 
           crud.editar(doc.id, data);
