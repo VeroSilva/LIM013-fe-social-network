@@ -1,5 +1,7 @@
 # Creando una Red Social
 
+Live: https://verosilva.github.io/LIM013-fe-social-network/src/
+
 ## Índice
 
 - [1. Preámbulo](#1-preámbulo)
@@ -21,7 +23,7 @@ Estos sitios facilitan la comunicacion entre personas, el intercambio de informa
 El presente proyecto **Mochileros** es una red social destinada a un publico apasionado por viajar y aventurarse, interesados por compartir sus experiencias y tener nuevas conexiones con otras personas. Esta comunidad de viajeros se nutre de las experiencias de cada uno basadas en viajes con bajos presupuestos, rutas, hospedajes, promociones, etc de cierto lugar dandole protagonismo a los usuarios y a las comunidades que estos conforman.
 Esta red social permite que cualquier usuario mochilero pueda crear su cuenta de acceso o iniciar sesion con su cuenta de Google y pueda con ella crear, editar y eliminar sus publicaciones de sus experiencias viajando, ademas podra actualizar su perfil.
 
-## 3. Definicion de usuario
+## 3. Definición de usuario
 
 El Mochilero se caracteriza por ser de corazon aventurero, es apasionado por vivir nuevas experiencias, no tiene problemas con viajar con bajo presupuesto, se caracteriza por ser sociable; le gusta compartir sus experiencias con amistades. Tiene entre 25 años y 35 años.
 
@@ -35,16 +37,15 @@ La app para Mochileros da una nueva oportunidad dentro de la situación excepcio
 
 ![Prototipos Móvil](prototipos/vista1cel.jpeg)
 
-## 5. Resumen del feedback
-
 ## 6. Construido con:🛠️
 
-Javascript Vanilla
-HTML5
-CSS
+- Javascript Vanilla
+- Jest
+- Firebase
+- CSS
 
-## 7. Autores🎁
+## 7. Autores 🎁
 
-**Veronica Silva** -[veroSilva](https://github.com/VeroSilva)
-**Katherin Moreno** -[KatLMD](https://github.com/KatLMD/LIM013-fe-social-network)
-**Estefania Moncada** -[Estefaniamr1](https://github.com/Estefaniamr1/LIM013-fe-social-network)
+- Verónica Silva [Repositorio](https://github.com/VeroSilva?tab=repositories)
+- Katherin Moreno [Pespositorio](https://github.com/KatLMD?tab=repositories)
+- Estefania Moncada [Pespositorio](https://github.com/Estefaniamr1?tab=repositories)
